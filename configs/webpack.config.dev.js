@@ -11,7 +11,8 @@ const appConfig = {
   "CatalogApiUrl": JSON.stringify("https://localhost/catalogs/api"),
   "ProgramApiUrl": JSON.stringify("https://localhost/programs/api"),
   "AuthServerUrl": JSON.stringify("https://localhost/auth"),
-  "TemplateApiRoot": JSON.stringify("/EmailTemplateApi")
+  "TemplateApiRoot": JSON.stringify("/EmailTemplateApi"),
+  "basename": JSON.stringify("/rad2/")
 };
 
 const METADATA = webpackMerge(commonConfig({
@@ -34,6 +35,7 @@ module.exports = () => {
         "ProgramApiUrl": METADATA.appConfig.ProgramApiUrl,
         "AuthServerUrl": METADATA.appConfig.AuthServerUrl,
         "TemplateApiRoot": METADATA.appConfig.TemplateApiRoot,
+        "Basename": METADATA.appConfig.basename,
         'ENV': JSON.stringify(METADATA.ENV),
         'process.env': {
           'ENV': JSON.stringify(METADATA.ENV),
