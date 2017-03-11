@@ -13,11 +13,11 @@ class ProgramsPage extends React.Component {
 
   render() {
     const {programs} = this.props;
-    
+
     return (
       <div>
         <h1>Programs</h1>
-        <ProgramList program={programs}/>
+        <ProgramList programs={programs}/>
       </div>
     );
   }

@@ -21,7 +21,7 @@ const ProgramList = ({programs}) => {
 };
 
 ProgramList.propTypes = {
-  program: PropTypes.array.isRequired
+  programs: PropTypes.array.isRequired
 };
 
 export default ProgramList;
