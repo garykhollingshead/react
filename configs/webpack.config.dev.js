@@ -68,9 +68,7 @@ module.exports = function () {
       process: true,
       module: false,
       clearImmediate: false,
-      setImmediate: false,
-      dns: "mock",
-      net: "mock"
+      setImmediate: false
     }
   };
 };
