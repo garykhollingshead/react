@@ -12,7 +12,7 @@ export function getPrograms(query) {
   return function(dispatch) {
     return programApi.getPrograms(query)
       .then(programs => {
-        dispatch(getProgramsSuccess(programs))
+        dispatch(getProgramsSuccess(programs));
       })
       .catch(error => {
         throw(error);

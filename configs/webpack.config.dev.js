@@ -1,48 +1,76 @@
-const webpack = require("webpack");
-const webpackMerge = require("webpack-merge");
-const commonConfig = require("./webpack.config.common");
 const helpers = require("./helpers");
-const DefinePlugin = require("webpack/lib/DefinePlugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const webpack = require("webpack");
 
-const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
-const HOST = process.env.HOST || 'localhost';
-const appConfig = {
-  "IndigoUiAssets": JSON.stringify("https://localhost:3000/static/js"),
-  "CatalogApiUrl": JSON.stringify("https://localhost/catalogs/api"),
-  "ProgramApiUrl": JSON.stringify("https://localhost/programs/api"),
-  "AuthServerUrl": JSON.stringify("https://localhost/auth"),
-  "TemplateApiRoot": JSON.stringify("/EmailTemplateApi"),
-  "basename": JSON.stringify("/rad2/")
-};
-
-const METADATA = webpackMerge(commonConfig({
-  env: ENV,
-  appConfig: appConfig
-}).metadata, {
-  host: HOST,
-  ENV: ENV,
-  appConfig: appConfig
-});
-
-module.exports = () => {
-  return webpackMerge(commonConfig({env: ENV, appConfig: appConfig}), {
+module.exports = function () {
+  return {
     devtool: "cheap-module-source-map",
     target: "web",
-    plugins: [
-      new DefinePlugin({
-        "IndigoUiAssets": METADATA.appConfig.IndigoUiAssets,
-        "CatalogApiUrl": METADATA.appConfig.CatalogApiUrl,
-        "ProgramApiUrl": METADATA.appConfig.ProgramApiUrl,
-        "AuthServerUrl": METADATA.appConfig.AuthServerUrl,
-        "TemplateApiRoot": METADATA.appConfig.TemplateApiRoot,
-        "Basename": METADATA.appConfig.basename,
-        'ENV': JSON.stringify(METADATA.ENV),
-        'process.env': {
-          'ENV': JSON.stringify(METADATA.ENV),
-          'NODE_ENV': JSON.stringify(METADATA.ENV)
+    entry: [
+      helpers.root("src/index")
+    ],
+    output: {
+      path: helpers.root("/dist"),
+      publicPath: "/rad2/",
+      filename: "bundle.js",
+      sourceMapFilename: "bundle.map"
+    },
+    resolve: {
+      extensions: [".js", ".json"],
+      modules: [helpers.root("src"), helpers.root("node_modules")]
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          include: helpers.root("src"),
+          use: ["babel-loader"]
+        },
+        {
+          test: /\.json$/,
+          use: "json-loader"
+        },
+        {
+          test: /\.css$/,
+          use: ["to-string-loader", "css-loader"]
+        },
+        {
+          test: /\.scss$/,
+          use: ["raw-loader", "sass-loader"]
+        },
+        {
+          test: /\.html$/,
+          use: "raw-loader",
+          exclude: [helpers.root("src/index.html")]
+        },
+        {
+          test: /\.(jpg|png|gif)$/,
+          use: "file-loader"
+        },
+        {
+          test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
+          use: "file-loader"
         }
-      }),
+      ]
+    },
+    plugins: [
+      new CopyWebpackPlugin([
+        {from: "src/assets/icons", to: "assets/icons"},
+        {from: "src/assets/fonts", to: "assets/fonts"},
+        {from: "src/assets/images", to: "assets/images"},
+        {from: "src/index.html", to: "./"}
+      ]),
       new webpack.NoEmitOnErrorsPlugin()
-    ]
-  });
+    ],
+    node: {
+      global: true,
+      crypto: "empty",
+      process: true,
+      module: false,
+      clearImmediate: false,
+      setImmediate: false,
+      dns: "mock",
+      net: "mock"
+    }
+  };
 };

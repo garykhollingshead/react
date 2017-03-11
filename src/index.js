@@ -7,11 +7,12 @@ import {Provider} from "react-redux";
 import routes from "./routes";
 import configureStore from "./store/configureStore";
 import {getPrograms} from "./actions/programActions";
+import * as urls from "./apis/urls";
 import "./styles/styles.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const browserHistory = useRouterHistory(createHistory)({
-  basename: Basename
+  basename: urls.Basename
 });
 
 const store = configureStore();

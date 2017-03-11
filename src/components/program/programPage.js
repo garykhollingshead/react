@@ -21,10 +21,10 @@ class ProgramsPage extends React.Component {
 
 ProgramsPage.propTypes = {
   programs: PropTypes.array.isRequired,
-  actions: PropTypes.func.isRequired
+  getPrograms: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     programs: state.programs
   };

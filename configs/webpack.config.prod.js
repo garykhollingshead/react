@@ -1,17 +1,18 @@
 const helpers = require("./helpers");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const webpack = require("webpack");
 
-module.exports = function (options) {
-  isProd = options.env === "production";
+module.exports = function () {
   return {
+    target: "web",
     entry: [
       helpers.root("src/index")
     ],
     output: {
       path: helpers.root("/dist"),
       publicPath: "/rad2/",
-      filename: 'bundle.js',
-      sourceMapFilename: 'bundle.map'
+      filename: "bundle.js",
+      sourceMapFilename: "bundle.map"
     },
     resolve: {
       extensions: [".js", ".json"],
@@ -26,11 +27,11 @@ module.exports = function (options) {
         },
         {
           test: /\.json$/,
-          use: 'json-loader'
+          use: "json-loader"
         },
         {
           test: /\.css$/,
-          use: ['to-string-loader', 'css-loader']
+          use: ["to-string-loader", "css-loader"]
         },
         {
           test: /\.scss$/,
@@ -38,30 +39,31 @@ module.exports = function (options) {
         },
         {
           test: /\.html$/,
-          use: 'raw-loader',
-          exclude: [helpers.root('src/index.html')]
+          use: "raw-loader",
+          exclude: [helpers.root("src/index.html")]
         },
         {
           test: /\.(jpg|png|gif)$/,
-          use: 'file-loader'
+          use: "file-loader"
         },
         {
           test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
-          use: 'file-loader'
+          use: "file-loader"
         }
       ]
     },
     plugins: [
       new CopyWebpackPlugin([
-        {from: 'src/assets/icon', to: 'assets/icon'},
-        {from: 'src/assets/fonts', to: 'assets/fonts'},
-        {from: 'src/assets/img', to: 'assets/img'},
-        {from: 'src/index.html', to: './'}
-      ])
+        {from: "src/assets/icon", to: "assets/icon"},
+        {from: "src/assets/fonts", to: "assets/fonts"},
+        {from: "src/assets/img", to: "assets/img"},
+        {from: "src/index.html", to: "./"}
+      ]),
+      new webpack.NoEmitOnErrorsPlugin()
     ],
     node: {
       global: true,
-      crypto: 'empty',
+      crypto: "empty",
       process: true,
       module: false,
       clearImmediate: false,
