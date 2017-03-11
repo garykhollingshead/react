@@ -1,6 +1,7 @@
 import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import ProgramList from "./programList";
 import * as programsActions from "../../actions/programActions";
 
 class ProgramsPage extends React.Component {
@@ -11,9 +12,12 @@ class ProgramsPage extends React.Component {
   }
 
   render() {
+    const {programs} = this.props;
+    
     return (
       <div>
         <h1>Programs</h1>
+        <ProgramList program={programs}/>
       </div>
     );
   }
