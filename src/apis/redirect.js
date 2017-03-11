@@ -7,8 +7,8 @@ class RedirectUrls {
     return apiBasePaths;
   }
 
-  getUrlParts(url) {
-    const indexOfApi = url.indexOf(this.apiBasePath.find(path => url.indexof(path) !== -1));
+  static getUrlParts(url) {
+    const indexOfApi = url.indexOf(this.apiBasePath.find(path => url.indexOf(path) !== -1));
     return {
       host: url.substring(0, indexOfApi),
       urlPath: url.substring(indexOfApi),

@@ -30,7 +30,7 @@ ProgramsPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    programs: state.programs
+    programs: state.programs.programs
   };
 }
 
