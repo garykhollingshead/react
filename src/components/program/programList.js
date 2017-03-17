@@ -1,7 +1,11 @@
 import React, {PropTypes} from "react";
 import ProgramListRow from "./programListRow";
+import Loading from "../common/loading";
 
-const ProgramList = ({programs}) => {
+const ProgramList = ({programs, isProgramsLoading}) => {
+  if (isProgramsLoading) {
+    return <Loading interval={300} dots={3}/>
+  }
   return (
     <table className="table">
       <thead>
@@ -21,7 +25,8 @@ const ProgramList = ({programs}) => {
 };
 
 ProgramList.propTypes = {
-  programs: PropTypes.array.isRequired
+  programs: PropTypes.array.isRequired,
+  isProgramsLoading: PropTypes.bool.isRequired
 };
 
 export default ProgramList;

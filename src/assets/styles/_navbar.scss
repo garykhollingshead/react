@@ -1,0 +1,16 @@
+.navbar-default {
+  background-color: $dark_gray;
+  border-color: inherit;
+  float: right;
+    color: $white;
+    text-transform: uppercase;
+    &:hover {
+      color: $yellow;
+    }
+}
+
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-nav > Menu.Item:focus {
+  color: $white;
+  background-color: transparent;
+}

@@ -3,4 +3,4 @@ export const CatalogApiUrl = "https://localhost/catalogs/api";
 export const ProgramApiUrl = "/programs/api";
 export const AuthServerUrl = "https://localhost/auth";
 export const TemplateApiRoot = "/EmailTemplateApi";
-export const Basename = "/rad2/";
+export const Basename = "/rad2";

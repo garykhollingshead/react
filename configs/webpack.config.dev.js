@@ -32,11 +32,15 @@ module.exports = function () {
         },
         {
           test: /\.css$/,
-          use: ["to-string-loader", "css-loader"]
+          use: ["style-loader", "css-loader"]
         },
         {
           test: /\.scss$/,
-          use: ["raw-loader", "sass-loader"]
+          use: ["css-loader", "sass-loader"]
+        },
+        {
+          test: /\.less$/,
+          use: ["css-loader", "less-loader"]
         },
         {
           test: /\.html$/,
@@ -58,7 +62,8 @@ module.exports = function () {
         {from: "src/assets/icons", to: "assets/icons"},
         {from: "src/assets/fonts", to: "assets/fonts"},
         {from: "src/assets/images", to: "assets/images"},
-        {from: "src/index.html", to: "./"}
+        {from: "src/index.html", to: "./"},
+        {from: "src/assets/webconfigs/web.config", to: "./"}
       ]),
       new webpack.NoEmitOnErrorsPlugin()
     ],

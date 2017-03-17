@@ -1,0 +1,136 @@
+md-card {
+  margin-left: 0;
+}
+
+md-card-header-text {
+  padding: 1rem;
+  .md-title {
+    word-break: break-all;
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: block;
+  }
+  .md-subhead {
+    word-break: break-all;
+    display: block;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+}
+
+.card-callout {
+  &.open-loop {
+    background-color: $mint;
+  }
+  &.close-loop {
+    background-color: $tan;
+  }
+  background-color: $mint;
+  color: $white;
+  text-align: center;
+  padding: 1rem;
+  .amount {
+    display: block;
+    font-size: 3rem;
+    font-weight: 100;
+  }
+  .productType {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 100;
+    line-height: 1.3;
+    text-transform: uppercase;
+    p {
+      font-size: 1rem;
+      letter-spacing: .75px;
+      margin-bottom: 0;
+    }
+  }
+  .default-tag,
+  .make-default-tag {
+    background-color: rgba(65, 65, 65, .7);
+    display: block;
+    font-size: 1rem;
+    letter-spacing: .75px;
+    margin-top: -10px;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: .5rem;
+    padding: .35rem 0;
+    text-transform: uppercase;
+  }
+  .make-default-tag {
+    background-color: rgba(65, 65, 65, .2);
+    &:hover {
+      background-color: rgba(65, 65, 65, .8);
+    }
+  }
+}
+
+/*.selected-card {
+    border: 1px solid $black;
+}*/
+
+md-card {
+  md-card-content {
+    padding: 10px 6px;
+  }
+}
+
+md-card-content {
+  .label {
+    word-break: break-all;
+    display: block;
+    font-size: 1.25rem;
+    font-weight: normal;
+    line-height: 1.1;
+    white-space: normal;
+    padding: .15rem .25rem;
+    &.title {
+      color: $black_65;
+      text-align: left;
+    }
+    &.property {
+      color: $dark_gray;
+      text-align: left;
+      padding-bottom: 1rem;
+    }
+  }
+}
+
+.search-results {
+  md-card {
+    box-shadow: none;
+    border-radius: 5px 5px 0 0;
+  }
+}
+
+.gridListBasicUsage md-grid-list {
+  margin: 8px;
+}
+
+.gridListBasicUsage md-grid-tile {
+    transition: all 400ms ease-out 50ms;
+}
+
+.productImage {
+  display: block;
+  max-width:218px;
+  max-height:244px;
+  width: auto;
+  height: auto;
+}
+
+.digital-card-image {
+  background-color: $mint;
+  color: $white;
+  text-align: center;
+  padding: 1rem;
+}
+
+.physical-card-image {
+  background-color: $purple;
+  color: $white;
+  text-align: center;
+  padding: 1rem;
+}

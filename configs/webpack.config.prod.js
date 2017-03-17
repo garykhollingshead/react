@@ -2,17 +2,21 @@ const helpers = require("./helpers");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
 
+const GLOBALS = {
+  "process.env.NODE_ENV": JSON.stringify("production")
+};
+
 module.exports = function () {
   return {
     target: "web",
+    devtool: "source-map",
     entry: [
       helpers.root("src/index")
     ],
     output: {
       path: helpers.root("/dist"),
       publicPath: "/rad2/",
-      filename: "bundle.js",
-      sourceMapFilename: "bundle.map"
+      filename: "bundle.js"
     },
     resolve: {
       extensions: [".js", ".json"],
@@ -54,20 +58,16 @@ module.exports = function () {
     },
     plugins: [
       new CopyWebpackPlugin([
-        {from: "src/assets/icon", to: "assets/icon"},
+        {from: "src/assets/icons", to: "assets/icons"},
         {from: "src/assets/fonts", to: "assets/fonts"},
-        {from: "src/assets/img", to: "assets/img"},
-        {from: "src/index.html", to: "./"}
+        {from: "src/assets/images", to: "assets/images"},
+        {from: "src/index.html", to: "./"},
+        {from: "src/assets/webconfigs/web.config", to: "./"}
       ]),
-      new webpack.NoEmitOnErrorsPlugin()
-    ],
-    node: {
-      global: true,
-      crypto: "empty",
-      process: true,
-      module: false,
-      clearImmediate: false,
-      setImmediate: false
-    }
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.DefinePlugin(GLOBALS),
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin()
+    ]
   };
 };

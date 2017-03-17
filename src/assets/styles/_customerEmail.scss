@@ -1,0 +1,41 @@
+.customer-email-templates {
+  tr {
+    display: flex;
+  }
+
+  th, td {
+    flex: 1 0 40%;
+
+    &.col-action {
+      flex-basis: 20%;
+    }
+  }
+
+
+  tbody {
+    tr {
+      color: #aaa;
+    }
+
+    td:first-child::before {
+      content: " ";
+      background-color: #b4b4b4;
+      display: inline-block;
+      width: 10.2px;
+      height: 10.2px;
+      margin-right: 7.375px;
+      border-radius: 50%;
+    }
+    
+    .active-email-template {
+      color: #222;
+      td:first-child::before {
+        background-color: #68cb7b;
+      }
+    }
+
+    .material-icons.edit {
+      color: $yellow;
+    }
+  }
+}

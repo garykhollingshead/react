@@ -1,4 +1,4 @@
-import * as types from "../actions/types";
+import * as types from "../actions/actionTypes";
 
 export default function programReducer(state = {
   isLoading: false,
@@ -14,6 +14,13 @@ export default function programReducer(state = {
       return Object.assign({}, state, {
         isLoading: false,
         programs: action.programs
+      });
+
+    case types.GET_PROGRAMS_FAILURE:
+      return Object.assign({}, state, {
+        isLoading: false,
+        programs: [],
+        loadingError: action.error
       });
 
     default:
