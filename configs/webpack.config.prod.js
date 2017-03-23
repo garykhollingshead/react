@@ -1,4 +1,4 @@
-const helpers = require("./helpers");
+const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
 
@@ -11,16 +11,16 @@ module.exports = function () {
     target: "web",
     devtool: "source-map",
     entry: [
-      helpers.root("src/index")
+      path.resolve(__dirname, "src/index")
     ],
     output: {
-      path: helpers.root("/dist"),
+      path: path.resolve(__dirname, "/dist"),
       publicPath: "/rad2/",
       filename: "bundle.js"
     },
     resolve: {
       extensions: [".js", ".json"],
-      modules: [helpers.root("src"), helpers.root("node_modules")]
+      modules: [path.resolve(__dirname, "src"), path.resolve(__dirname, "node_modules")]
     },
     module: {
       rules: [
@@ -44,7 +44,7 @@ module.exports = function () {
         {
           test: /\.html$/,
           use: "raw-loader",
-          exclude: [helpers.root("src/index.html")]
+          exclude: [path.resolve(__dirname, "src/index.html")]
         },
         {
           test: /\.(jpg|png|gif)$/,
