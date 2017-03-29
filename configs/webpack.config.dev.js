@@ -1,4 +1,4 @@
-const path = require("path");
+const helpers = require("./helpers");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
 
@@ -7,23 +7,23 @@ module.exports = function () {
     devtool: "cheap-module-source-map",
     target: "web",
     entry: [
-      path.resolve(__dirname, "src/index")
+      helpers.root("src/index")
     ],
     output: {
-      path: path.resolve(__dirname, "/dist"),
+      path: helpers.root("/dist"),
       publicPath: "/rad2/",
       filename: "bundle.js",
       sourceMapFilename: "bundle.map"
     },
     resolve: {
       extensions: [".js", ".json"],
-      modules: [path.resolve(__dirname, "src"), path.resolve(__dirname, "node_modules")]
+      modules: [helpers.root("src"), helpers.root("node_modules")]
     },
     module: {
       rules: [
         {
           test: /\.js$/,
-          include: path.resolve(__dirname, "src"),
+          include: helpers.root("src"),
           use: ["babel-loader"]
         },
         {
@@ -45,7 +45,7 @@ module.exports = function () {
         {
           test: /\.html$/,
           use: "raw-loader",
-          exclude: [path.resolve(__dirname, "src/index.html")]
+          exclude: [helpers.root("src/index.html")]
         },
         {
           test: /\.(jpg|png|gif)$/,
